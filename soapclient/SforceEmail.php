@@ -24,107 +24,134 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-define ("EMAIL_PRIORITY_HIGHEST", 'Highest');
-define ("EMAIL_PRIORITY_HIGH", 'High');
-define ("EMAIL_PRIORITY_NORMAL", 'Normal');
-define ("EMAIL_PRIORITY_LOW", 'Low');
-define ("EMAIL_PRIORITY_LOWEST", 'Lowest');
+define("EMAIL_PRIORITY_HIGHEST", 'Highest');
+define("EMAIL_PRIORITY_HIGH", 'High');
+define("EMAIL_PRIORITY_NORMAL", 'Normal');
+define("EMAIL_PRIORITY_LOW", 'Low');
+define("EMAIL_PRIORITY_LOWEST", 'Lowest');
 
-class Email {
-  public function setBccSender($bccSender) {
-    $this->bccSender = $bccSender;
-  }
+class Email
+{
+    public function setBccSender($bccSender)
+    {
+        $this->bccSender = $bccSender;
+    }
 
-  public function setEmailPriority($priority) {
-    $this->emailPriority = $priority;
-  }
+    public function setEmailPriority($priority)
+    {
+        $this->emailPriority = $priority;
+    }
    
-  public function setSubject($subject) {
-    $this->subject = $subject;
-  }
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+    }
 
-  public function setSaveAsActivity($saveAsActivity) {
-    $this->saveAsActivity = $saveAsActivity;
-  }
+    public function setSaveAsActivity($saveAsActivity)
+    {
+        $this->saveAsActivity = $saveAsActivity;
+    }
 
-  public function setReplyTo($replyTo) {
-    $this->replyTo = $replyTo;
-  }
+    public function setReplyTo($replyTo)
+    {
+        $this->replyTo = $replyTo;
+    }
 
-  public function setUseSignature($useSignature) {
-    $this->useSignature = $useSignature;
-  }
+    public function setUseSignature($useSignature)
+    {
+        $this->useSignature = $useSignature;
+    }
   
-  public function setSenderDisplayName($name) {
-    $this->senderDisplayName = $name;
-  }
+    public function setSenderDisplayName($name)
+    {
+        $this->senderDisplayName = $name;
+    }
 }
 
-class SingleEmailMessage extends Email {
-  public function __construct() {}
+class SingleEmailMessage extends Email
+{
+    public function __construct()
+    {
+    }
 
 
-  public function setBccAddresses($addresses) {
-    $this->bccAddresses = $addresses;
-  }
-  public $ccAddresses;
+    public function setBccAddresses($addresses)
+    {
+        $this->bccAddresses = $addresses;
+    }
+    public $ccAddresses;
 
-  public function setCcAddresses($addresses) {
-    $this->ccAddresses = $addresses;
-  }
+    public function setCcAddresses($addresses)
+    {
+        $this->ccAddresses = $addresses;
+    }
 
-  public function setCharset($charset) {
-    $this->charset = $charset;
-  }
+    public function setCharset($charset)
+    {
+        $this->charset = $charset;
+    }
 
-  public function setHtmlBody($htmlBody) {
-    $this->htmlBody = $htmlBody;
-  }
+    public function setHtmlBody($htmlBody)
+    {
+        $this->htmlBody = $htmlBody;
+    }
 
-  public function setOrgWideEmailAddressId($orgWideEmailAddressId) {
-    $this->orgWideEmailAddressId = $orgWideEmailAddressId;
-  }
+    public function setOrgWideEmailAddressId($orgWideEmailAddressId)
+    {
+        $this->orgWideEmailAddressId = $orgWideEmailAddressId;
+    }
 
-  public function setPlainTextBody($plainTextBody) {
-    $this->plainTextBody = $plainTextBody;
-  }
+    public function setPlainTextBody($plainTextBody)
+    {
+        $this->plainTextBody = $plainTextBody;
+    }
 
-  public function setTargetObjectId($targetObjectId) {
-    $this->targetObjectId = $targetObjectId;
-  }
+    public function setTargetObjectId($targetObjectId)
+    {
+        $this->targetObjectId = $targetObjectId;
+    }
 
-  public function setTemplateId($templateId) {
-    $this->templateId = $templateId;
-  }
+    public function setTemplateId($templateId)
+    {
+        $this->templateId = $templateId;
+    }
 
-  public function setToAddresses($array) {
-    $this->toAddresses = $array;
-  }
+    public function setToAddresses($array)
+    {
+        $this->toAddresses = $array;
+    }
 
-  public function setWhatId($whatId) {
-    $this->whatId = $whatId;
-  }
+    public function setWhatId($whatId)
+    {
+        $this->whatId = $whatId;
+    }
 
-  public function setFileAttachments($array) {
-    $this->fileAttachments = $array;
-  }
+    public function setFileAttachments($array)
+    {
+        $this->fileAttachments = $array;
+    }
 
-  public function setDocumentAttachments($array) {
-    $this->documentAttachments = $array;
-  }
+    public function setDocumentAttachments($array)
+    {
+        $this->documentAttachments = $array;
+    }
 }
 
-class MassEmailMessage extends Email {
-  public function setTemplateId($templateId) {
-    $this->templateId = $templateId;
-  }
+class MassEmailMessage extends Email
+{
+    public function setTemplateId($templateId)
+    {
+        $this->templateId = $templateId;
+    }
 
-  public function setWhatIds($array) {
-    $this->whatIds = $array;
-  }
+    public function setWhatIds($array)
+    {
+        $this->whatIds = $array;
+    }
 
-  public function setTargetObjectIds($array) {
-    $this->targetObjectIds = $array;
-  }
+    public function setTargetObjectIds($array)
+    {
+        $this->targetObjectIds = $array;
+    }
 }
 ?>
