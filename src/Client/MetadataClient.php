@@ -25,14 +25,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace DeveloperForce\PhpToolkit;
+namespace DeveloperForce\PhpToolkit\Client;
 
 use SoapClient;
 use SoapVar;
 use SoapHeader;
 use stdClass;
 
-class SforceMetadataClient
+class MetadataClient
 {
 
     /**
@@ -122,7 +122,9 @@ class SforceMetadataClient
     {
         $this->sforce->__setSoapHeaders(null);
         $session_header = new SoapHeader(
-            $this->namespace, 'SessionHeader', array (
+            $this->namespace,
+            'SessionHeader',
+            array (
             'sessionId' => $sessionId
             )
         );
@@ -153,7 +155,7 @@ class SforceMetadataClient
     }
   
     public function update($obj)
-    {    
+    {
         $encodedObj = new stdClass();
         $encodedObj->UpdateMetadata = $obj;
         $encodedObj->UpdateMetadata->metadata = new SoapVar($obj->metadata, SOAP_ENC_OBJECT, $this->getObjtype($obj->metadata), $this->namespace);
@@ -167,12 +169,12 @@ class SforceMetadataClient
         $encodedObj->metadata = new SoapVar($obj, SOAP_ENC_OBJECT, $this->getObjtype($obj), $this->namespace);
      
         return $this->sforce->delete($encodedObj);
-    }  
+    }
   
     public function checkStatus($ids)
     {
         return $this->sforce->checkStatus($ids);
-    }  
+    }
 
     public function getLastRequest()
     {
@@ -207,6 +209,3 @@ class SforceMetadataClient
         }
     }
 }
-
-
-

@@ -8,7 +8,7 @@
 define("SOAP_CLIENT_BASEDIR", "../wsdl");
 $USERNAME='trannicholas@yahoo.com';
 $PASSWORD='changeme';
-require_once (SOAP_CLIENT_BASEDIR.'/SforcePartnerClient.php');
+require_once (SOAP_CLIENT_BASEDIR.'/PartnerClient.php');
 require_once (SOAP_CLIENT_BASEDIR.'/SforceHeaderOptions.php');
 
 

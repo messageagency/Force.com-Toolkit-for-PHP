@@ -2,14 +2,14 @@
 
 namespace DeveloperForce\PhpToolkit;
 
-class SforceSearchResult
+class SearchResult
 {
     public $searchRecords;
 
     public function __construct($response)
     {
 
-        if($response instanceof SforceSearchResult) {
+        if ($response instanceof SearchResult) {
             $this->searchRecords = $response->searchRecords;
         } else {
             $this->searchRecords = array();

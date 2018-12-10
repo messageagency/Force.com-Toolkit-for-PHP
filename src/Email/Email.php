@@ -1,4 +1,7 @@
 <?php
+
+namespace DeveloperForce\PhpToolkit\Email;
+
 /*
  * Copyright (c) 2007, salesforce.com, inc.
  * All rights reserved.
@@ -25,83 +28,46 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace DeveloperForce\PhpToolkit;
-
-class SforceCustomObject
+class Email
 {
-    public function setDeploymentStatus($deploymentStatus)
+    const EMAIL_PRIORITY_HIGHEST = 'Highest';
+    const EMAIL_PRIORITY_HIGH = 'High';
+    const EMAIL_PRIORITY_NORMAL = 'Normal';
+    const EMAIL_PRIORITY_LOW = 'Low';
+    const EMAIL_PRIORITY_LOWEST = 'Lowest';
+
+    public function setBccSender($bccSender)
     {
-        $this->deploymentStatus = $deploymentStatus;
+        $this->bccSender = $bccSender;
     }
 
-    public function setDescription($description)
+    public function setEmailPriority($priority)
     {
-        $this->description = $description;
+        $this->emailPriority = $priority;
+    }
+   
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
     }
 
-    public function setEnableActivities($enableActivities)
+    public function setSaveAsActivity($saveAsActivity)
     {
-        $this->enableActivities = $enableActivities;
+        $this->saveAsActivity = $saveAsActivity;
     }
 
-    public function setEnableDivisions($enableDivisions)
+    public function setReplyTo($replyTo)
     {
-        $this->enableDivisions = $enableDivisions;
+        $this->replyTo = $replyTo;
     }
 
-    public function setEnableHistory($enableHistory)
+    public function setUseSignature($useSignature)
     {
-        $this->enableHistory = $enableHistory;
+        $this->useSignature = $useSignature;
     }
-
-    public function setEnableReports($enableReports)
+  
+    public function setSenderDisplayName($name)
     {
-        $this->enableReports = $enableReports;
-    }
-
-    public function setFields($fields)
-    {
-        $this->fields = $fields;
-    }
-
-    public function setFullName($fullName)
-    {
-        $this->fullName = $fullName;
-    }
-
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-    }
-
-    public function setHousehold($household)
-    {
-        $this->household = $household;
-    }
-
-    public function setLabel($label)
-    {
-        $this->label = $label;
-    }
-
-    public function setNameField($nameField)
-    {
-        $this->nameField = $nameField;
-    }
-
-    public function setPluralLabel($pluralLabel)
-    {
-        $this->pluralLabel = $pluralLabel;
-    }
-
-    public function setSharingModel($sharingModel)
-    {
-        $this->sharingModel = $sharingModel;
-    }
-
-    public function setStartsWith($startsWith)
-    {
-        $this->startsWith = $startsWith;
+        $this->senderDisplayName = $name;
     }
 }
-

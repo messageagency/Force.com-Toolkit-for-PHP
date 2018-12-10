@@ -26,7 +26,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace DeveloperForce\PhpToolkit;
+namespace DeveloperForce\PhpToolkit\Client;
 
 use SoapClient;
 use SoapHeader;
@@ -38,7 +38,7 @@ use stdClass;
  *
  * @package SalesforceSoapClient
  */
-class SforceBaseClient
+class BaseClient
 {
 
     /**
@@ -68,7 +68,7 @@ class SforceBaseClient
     
     protected function getSoapClient($wsdl, $options)
     {
-        return new SoapClient($wsdl, $options);      
+        return new SoapClient($wsdl, $options);
     }
     
     public function getNamespace()
@@ -108,12 +108,12 @@ class SforceBaseClient
      *
      * @param string $wsdl         Salesforce.com Partner WSDL
      * @param object $proxy        (optional) proxy settings with properties host, port,
-     *                             login and password      
+     *                             login and password
      * @param array  $soap_options (optional) Additional options to send to the
      *                             SoapClient constructor. @see
-     *                             http://php.net/manual/en/soapclient.soapclient.php            
+     *                             http://php.net/manual/en/soapclient.soapclient.php
      */
-    public function createConnection($wsdl, $proxy=null, $soap_options=array())
+    public function createConnection($wsdl, $proxy = null, $soap_options = array())
     {
         
         $soapClientArray = array_merge(
@@ -123,12 +123,13 @@ class SforceBaseClient
             'trace' => 1,
             'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
             'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP
-            ), $soap_options
+            ),
+            $soap_options
         );
 
         // We don't need to parse out any subversion suffix - e.g. "-01" since
         // PHP type conversion will ignore it
-        if (version_compare(PHP_VERSION, '5.2') < 0 ) {
+        if (version_compare(PHP_VERSION, '5.2') < 0) {
             die("PHP versions older than 5.2 are no longer supported. Please upgrade!");
         }
 
@@ -136,7 +137,7 @@ class SforceBaseClient
             $proxySettings = array();
             $proxySettings['proxy_host'] = $proxy->host;
             $proxySettings['proxy_port'] = $proxy->port; // Use an integer, not a string
-            $proxySettings['proxy_login'] = $proxy->login; 
+            $proxySettings['proxy_login'] = $proxy->login;
             $proxySettings['proxy_password'] = $proxy->password;
             $soapClientArray = array_merge($soapClientArray, $proxySettings);
         }
@@ -150,7 +151,9 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->callOptions = new SoapHeader(
-                $this->namespace, 'CallOptions', array (
+                $this->namespace,
+                'CallOptions',
+                array (
                 'client' => $header->client,
                 'defaultNamespace' => $header->defaultNamespace
                 )
@@ -197,7 +200,7 @@ class SforceBaseClient
      *
      * @return LoginResult
      */
-    public function ContinueSession($sessionid, $serverurl) 
+    public function continueSession($sessionid, $serverurl)
     {
         $this->sforce->__setSoapHeaders(null);
         if ($this->callOptions != null) {
@@ -215,15 +218,15 @@ class SforceBaseClient
         $result = (object) array(
         'sessionId' => $sessionid,
         'serverUrl' => $serverurl
-        );        
+        );
         $this->_setLoginHeader($result);
         
         return $result;
     }
     
-    public function RefreshToken($client_id, $secret, $refresh_token)
+    public function refreshToken($client_id, $secret, $refresh_token)
     {
-        try{
+        try {
             $url = 'https://login.salesforce.com/services/oauth2/token';
             $fields = array(
             'grant_type'    => "refresh_token",
@@ -251,11 +254,10 @@ class SforceBaseClient
 
             $json_a = json_decode($result, true);
             return $json_a;
-            
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-    }    
+    }
 
     /**
      * log outs from the salseforce system`
@@ -280,7 +282,7 @@ class SforceBaseClient
         $arg = new stdClass();
         $this->logout();
         return $this->sforce->invalidateSessions();
-    } 
+    }
  
     /**
      * Specifies the session ID returned from the login server after a successful
@@ -305,12 +307,12 @@ class SforceBaseClient
         $this->sforce->__setLocation($location);
     }
 
-    private function setHeaders($call=null)
+    private function setHeaders($call = null)
     {
         $this->sforce->__setSoapHeaders(null);
         
         $header_array = array ();
-        if($this->sessionHeader ) {
+        if ($this->sessionHeader) {
             array_push($header_array, $this->sessionHeader);
         }
 
@@ -319,9 +321,9 @@ class SforceBaseClient
             array_push($header_array, $header);
         }
 
-        if ($call == "create" 
-            || $call == "merge" 
-            || $call == "update" 
+        if ($call == "create"
+            || $call == "merge"
+            || $call == "update"
             || $call == "upsert"
         ) {
             $header = $this->assignmentRuleHeader;
@@ -337,9 +339,9 @@ class SforceBaseClient
             }
         }
 
-        if ($call == "create" 
-            || $call == "resetPassword" 
-            || $call == "update" 
+        if ($call == "create"
+            || $call == "resetPassword"
+            || $call == "update"
             || $call == "upsert"
         ) {
             $header = $this->emailHeader;
@@ -348,11 +350,11 @@ class SforceBaseClient
             }
         }
 
-        if ($call == "create" 
-            || $call == "merge" 
-            || $call == "query" 
-            || $call == "retrieve" 
-            || $call == "update" 
+        if ($call == "create"
+            || $call == "merge"
+            || $call == "query"
+            || $call == "retrieve"
+            || $call == "update"
             || $call == "upsert"
         ) {
             $header = $this->mruHeader;
@@ -368,8 +370,8 @@ class SforceBaseClient
             }
         }
 
-        if ($call == "query" 
-            || $call == "queryMore" 
+        if ($call == "query"
+            || $call == "queryMore"
             || $call == "retrieve"
         ) {
             $header = $this->queryHeader;
@@ -407,7 +409,7 @@ class SforceBaseClient
         'process', 'query', 'retrieve', 'search', 'undelete',
         'update', 'upsert',
         );
-        if(in_array($call, $packageVersionHeaderCalls)) {
+        if (in_array($call, $packageVersionHeaderCalls)) {
             $header = $this->packageVersionHeader;
             if ($header != null) {
                 array_push($header_array, $header);
@@ -421,7 +423,9 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->assignmentRuleHeader = new SoapHeader(
-                $this->namespace, 'AssignmentRuleHeader', array (
+                $this->namespace,
+                'AssignmentRuleHeader',
+                array (
                 'assignmentRuleId' => $header->assignmentRuleId,
                 'useDefaultRule' => $header->useDefaultRuleFlag
                 )
@@ -435,7 +439,9 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->emailHeader = new SoapHeader(
-                $this->namespace, 'EmailHeader', array (
+                $this->namespace,
+                'EmailHeader',
+                array (
                 'triggerAutoResponseEmail' => $header->triggerAutoResponseEmail,
                 'triggerOtherEmail' => $header->triggerOtherEmail,
                 'triggerUserEmail' => $header->triggerUserEmail
@@ -450,7 +456,9 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->loginScopeHeader = new SoapHeader(
-                $this->namespace, 'LoginScopeHeader', array (
+                $this->namespace,
+                'LoginScopeHeader',
+                array (
                 'organizationId' => $header->organizationId,
                 'portalId' => $header->portalId
                 )
@@ -465,7 +473,9 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->mruHeader = new SoapHeader(
-                $this->namespace, 'MruHeader', array (
+                $this->namespace,
+                'MruHeader',
+                array (
                 'updateMru' => $header->updateMruFlag
                 )
             );
@@ -478,7 +488,9 @@ class SforceBaseClient
     {
         if ($id != null) {
             $this->sessionHeader = new SoapHeader(
-                $this->namespace, 'SessionHeader', array (
+                $this->namespace,
+                'SessionHeader',
+                array (
                 'sessionId' => $id
                 )
             );
@@ -493,7 +505,9 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->userTerritoryDeleteHeader = new SoapHeader(
-                $this->namespace, 'UserTerritoryDeleteHeader  ', array (
+                $this->namespace,
+                'UserTerritoryDeleteHeader  ',
+                array (
                 'transferToUserId' => $header->transferToUserId
                 )
             );
@@ -506,7 +520,9 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->queryHeader = new SoapHeader(
-                $this->namespace, 'QueryOptions', array (
+                $this->namespace,
+                'QueryOptions',
+                array (
                 'batchSize' => $header->batchSize
                 )
             );
@@ -519,7 +535,9 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->allowFieldTruncationHeader = new SoapHeader(
-                $this->namespace, 'AllowFieldTruncationHeader', array (
+                $this->namespace,
+                'AllowFieldTruncationHeader',
+                array (
                 'allowFieldTruncation' => $header->allowFieldTruncation
                 )
             );
@@ -532,7 +550,8 @@ class SforceBaseClient
     {
         if ($header != null) {
             $this->localeOptions = new SoapHeader(
-                $this->namespace, 'LocaleOptions',
+                $this->namespace,
+                'LocaleOptions',
                 array (
                 'language' => $header->language
                 )
@@ -627,7 +646,7 @@ class SforceBaseClient
      */
     protected function _sanitizeValue($value)
     {
-        if((strpos($value, '&') !== false) || (strpos($value, '<') !== false) || (strpos($value, '>') !== false)) {
+        if ((strpos($value, '&') !== false) || (strpos($value, '<') !== false) || (strpos($value, '>') !== false)) {
             return '<![CDATA['.$value.']]>';
         }
         return $value;
@@ -695,7 +714,7 @@ class SforceBaseClient
              $backtrace = debug_backtrace();
              die('Please pass in array to this function:  '.$backtrace[0]['function']);
         }
-    } 
+    }
     
     protected function _sendEmail($arg)
     {
@@ -727,10 +746,10 @@ class SforceBaseClient
     public function delete($ids)
     {
         $this->setHeaders("delete");
-        if(count($ids) > 200) {
+        if (count($ids) > 200) {
             $result = array();
             $chunked_ids = array_chunk($ids, 200);
-            foreach($chunked_ids as $cids) {
+            foreach ($chunked_ids as $cids) {
                 $arg = new stdClass;
                 $arg->ids = $cids;
                 $result = array_merge($result, $this->sforce->delete($arg)->result);
@@ -834,12 +853,12 @@ class SforceBaseClient
      * @param  string Type   Object Type
      * @return DescribeLayoutResult
      */
-    public function describeLayout($type, array $recordTypeIds=null)
+    public function describeLayout($type, array $recordTypeIds = null)
     {
         $this->setHeaders("describeLayout");
         $arg = new stdClass();
         $arg->sObjectType = new SoapVar($type, XSD_STRING, 'string', 'http://www.w3.org/2001/XMLSchema');
-        if (isset($recordTypeIds) && count($recordTypeIds)) { 
+        if (isset($recordTypeIds) && count($recordTypeIds)) {
             $arg->recordTypeIds = $recordTypeIds;
         }
         return $this->sforce->describeLayout($arg)->result;
@@ -904,7 +923,7 @@ class SforceBaseClient
     /**
      * Retrieves available category groups along with their data category structure for objects specified in the request.
      *
-     * @param  DataCategoryGroupSobjectTypePair $pairs 
+     * @param  DataCategoryGroupSobjectTypePair $pairs
      * @param  bool                             $topCategoriesOnly Object Type
      * @return DescribeLayoutResult
      */
@@ -1037,15 +1056,16 @@ class SforceBaseClient
     /**
      * Executes a text search in your organization's data.
      *
-     * @param  string $searchString Search string that specifies the text expression to search for.
-     * @return SforceSearchResult
+     * @param string $searchString Search string that specifies the text expression to search for.
+     *
+     * @return SearchResult
      */
     public function search($searchString)
     {
         $this->setHeaders("search");
         $arg = new stdClass();
         $arg->searchString = new SoapVar($searchString, XSD_STRING, 'string', 'http://www.w3.org/2001/XMLSchema');
-        return new SforceSearchResult($this->sforce->search($arg)->result);
+        return new SearchResult($this->sforce->search($arg)->result);
     }
 
     /**

@@ -26,7 +26,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace DeveloperForce\PhpToolkit;
+namespace DeveloperForce\PhpToolkit\Client;
 
 use SoapVar;
 use SoapParam;
@@ -38,11 +38,11 @@ use stdClass;
  * @package SalesforceSoapClient
  */
 /**
- * SforceEnterpriseClient class.
+ * EnterpriseClient class.
  *
  * @package SalesforceSoapClient
  */
-class SforceEnterpriseClient extends SforceBaseClient
+class EnterpriseClient extends BaseClient
 {
     const ENTERPRISE_NAMESPACE = 'urn:enterprise.soap.sforce.com';
 
@@ -64,8 +64,8 @@ class SforceEnterpriseClient extends SforceBaseClient
         foreach ($sObjects as &$sObject) {
             // FIX for fieldsToNull issue - allow array in fieldsToNull (STEP #1)
             $xmlStr = '';
-            if(isset($sObject->fieldsToNull) && is_array($sObject->fieldsToNull)) {
-                foreach($sObject->fieldsToNull as $fieldToNull) {
+            if (isset($sObject->fieldsToNull) && is_array($sObject->fieldsToNull)) {
+                foreach ($sObject->fieldsToNull as $fieldToNull) {
                     $xmlStr .= '<fieldsToNull>' . $fieldToNull . '</fieldsToNull>';
                 }
             }
@@ -74,7 +74,7 @@ class SforceEnterpriseClient extends SforceBaseClient
             $sObject = new SoapVar($sObject, SOAP_ENC_OBJECT, $type, $this->namespace);
 
             // FIX for fieldsToNull issue - allow array in fieldsToNull (STEP #2)
-            if($xmlStr != '') {
+            if ($xmlStr != '') {
                  $sObject->enc_value->fieldsToNull = new SoapVar(new SoapVar($xmlStr, XSD_ANYXML), SOAP_ENC_ARRAY);
             }
             // ------
@@ -96,11 +96,10 @@ class SforceEnterpriseClient extends SforceBaseClient
     {
 
         foreach ($sObjects as &$sObject) {
-
             // FIX for fieldsToNull issue - allow array in fieldsToNull (STEP #1)
             $xmlStr = '';
-            if(isset($sObject->fieldsToNull) && is_array($sObject->fieldsToNull)) {
-                foreach($sObject->fieldsToNull as $fieldToNull) {
+            if (isset($sObject->fieldsToNull) && is_array($sObject->fieldsToNull)) {
+                foreach ($sObject->fieldsToNull as $fieldToNull) {
                     $xmlStr .= '<fieldsToNull>' . $fieldToNull . '</fieldsToNull>';
                 }
             }
@@ -109,7 +108,7 @@ class SforceEnterpriseClient extends SforceBaseClient
             $sObject = new SoapVar($sObject, SOAP_ENC_OBJECT, $type, $this->namespace);
         
             // FIX for fieldsToNull issue - allow array in fieldsToNull (STEP #2)
-            if($xmlStr != '') {
+            if ($xmlStr != '') {
                  $sObject->enc_value->fieldsToNull = new SoapVar(new SoapVar($xmlStr, XSD_ANYXML), SOAP_ENC_ARRAY);
             }
             // ------
@@ -137,8 +136,8 @@ class SforceEnterpriseClient extends SforceBaseClient
         foreach ($sObjects as &$sObject) {
             // FIX for fieldsToNull issue - allow array in fieldsToNull (STEP #1)
             $xmlStr = '';
-            if(isset($sObject->fieldsToNull) && is_array($sObject->fieldsToNull)) {
-                foreach($sObject->fieldsToNull as $fieldToNull) {
+            if (isset($sObject->fieldsToNull) && is_array($sObject->fieldsToNull)) {
+                foreach ($sObject->fieldsToNull as $fieldToNull) {
                       $xmlStr .= '<fieldsToNull>' . $fieldToNull . '</fieldsToNull>';
                 }
             }
@@ -147,7 +146,7 @@ class SforceEnterpriseClient extends SforceBaseClient
             $sObject = new SoapVar($sObject, SOAP_ENC_OBJECT, $type, $this->namespace);
 
             // FIX for fieldsToNull issue - allow array in fieldsToNull (STEP #2)
-            if($xmlStr != '') {
+            if ($xmlStr != '') {
                 $sObject->enc_value->fieldsToNull = new SoapVar(new SoapVar($xmlStr, XSD_ANYXML), SOAP_ENC_ARRAY);
             }
             // ------
@@ -171,4 +170,3 @@ class SforceEnterpriseClient extends SforceBaseClient
         return parent::_merge($arg);
     }
 }
-

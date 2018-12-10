@@ -1,7 +1,4 @@
 <?php
-
-namespace DeveloperForce\PhpToolkit;
-
 /*
  * Copyright (c) 2007, salesforce.com, inc.
  * All rights reserved.
@@ -28,46 +25,26 @@ namespace DeveloperForce\PhpToolkit;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-class Email
+namespace DeveloperForce\PhpToolkit;
+
+final class FieldTypes
 {
-    const EMAIL_PRIORITY_HIGHEST = 'Highest';
-    const EMAIL_PRIORITY_HIGH = 'High';
-    const EMAIL_PRIORITY_NORMAL = 'Normal';
-    const EMAIL_PRIORITY_LOW = 'Low';
-    const EMAIL_PRIORITY_LOWEST = 'Lowest';
 
-    public function setBccSender($bccSender)
-    {
-        $this->bccSender = $bccSender;
-    }
+    const DEPLOYMENT_STATUS_INDEVELOPMENT = 'InDevelopment';
+    const DEPLOYMENT_STATUS_DEPLOYED = 'Deployed';
 
-    public function setEmailPriority($priority)
-    {
-        $this->emailPriority = $priority;
-    }
-   
-    public function setSubject($subject)
-    {
-        $this->subject = $subject;
-    }
+    const GENDER_NEUTER = 'Neuter';
+    const GENDER_MASCULINE = 'Masculine';
+    const GENDER_FEMININE = 'Feminine';
 
-    public function setSaveAsActivity($saveAsActivity)
-    {
-        $this->saveAsActivity = $saveAsActivity;
-    }
+    const SHARING_MODEL_PRIVATE = 'Private';
+    const SHARING_MODEL_READ = 'Read';
+    const SHARING_MODEL_READWRITE = 'ReadWrite';
 
-    public function setReplyTo($replyTo)
-    {
-        $this->replyTo = $replyTo;
-    }
+    const STARTS_WITH_CONSONANT = 'Consonant';
+    const STARTS_WITH_VOWEL = 'Vowel';
+    const STARTS_WITH_SPECIAL = 'Special';
 
-    public function setUseSignature($useSignature)
-    {
-        $this->useSignature = $useSignature;
-    }
-  
-    public function setSenderDisplayName($name)
-    {
-        $this->senderDisplayName = $name;
-    }
+    const TREAT_BLANKS_AS_BLANK = 'BlankAsBlank';
+    const TREAT_BLANKS_AS_ZERO = 'BlankAsZero';
 }

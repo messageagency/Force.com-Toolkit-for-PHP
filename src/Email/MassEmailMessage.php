@@ -1,6 +1,6 @@
 <?php
 
-namespace DeveloperForce\PhpToolkit;
+namespace DeveloperForce\PhpToolkit\Email;
 
 class MassEmailMessage extends Email
 {

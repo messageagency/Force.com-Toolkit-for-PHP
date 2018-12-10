@@ -7,10 +7,9 @@ abstract class Lib_Test_TestAbstractEnterprise extends Lib_Test_TestAbstract
 	public function __construct($soapDir)
 	{
 		parent::__construct($soapDir);
-		require_once ($this->_soapDir . '/SforceEnterpriseClient.php');
+		require_once ($this->_soapDir . '/EnterpriseClient.php');
 		require_once ($this->_soapDir . '/SforceHeaderOptions.php');
-		require_once ($this->_soapDir . '/SforceMetadataClient.php');
-				
+		require_once ($this->_soapDir . '/MetadataClient.php		
 		$this->_mySforceConnection = new SforceEnterpriseClient();
 		$this->_mySoapClient = $this->_mySforceConnection->createConnection($this->getWSDL());
 		$this->_mylogin = $this->_mySforceConnection->login($this->_userName, $this->_password);

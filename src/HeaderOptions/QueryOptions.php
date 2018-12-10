@@ -1,6 +1,6 @@
 <?php
 
-namespace DeveloperForce\PhpToolkit;
+namespace DeveloperForce\PhpToolkit\HeaderOptions;
 
 /**
  * To be used with Retrieve, Query, and QueryMore operations.

@@ -1,6 +1,6 @@
 <?php
 require_once ('PHPUnit/Framework/TestCase.php');
-require_once ('../soapclient/SforcePartnerClient.php');
+require_once ('../soapclient/PartnerClient.php');
 require_once ('../soapclient/SforceHeaderOptions.php');
 
 /*

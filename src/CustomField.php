@@ -2,7 +2,7 @@
 
 namespace DeveloperForce\PhpToolkit;
 
-class SforceCustomField
+class CustomField
 {
     public function setCaseSensitive($caseSensitive)
     {

@@ -2,13 +2,16 @@
 
 namespace DeveloperForce\PhpToolkit;
 
+use stdClass;
+use Exception;
+
 class SObject
 {
     public $type;
     public $fields;
     //    public $sobject;
 
-    public function __construct($response=null)
+    public function __construct($response = null)
     {
         if (!isset($response) && !$response) {
             return;
@@ -43,7 +46,6 @@ class SObject
                         // this is for parent to child relationships
                         $this->queryResult = new QueryResult($response->any);
                     }
-
                 } else {
                     // If ANY is an array
                     if (is_array($response->any)) {
@@ -52,7 +54,7 @@ class SObject
 
                         // Modify the foreach to have $key=>$value
                         // Added on 28th April 2008
-                        foreach ($response->any as $key=>$item) {
+                        foreach ($response->any as $key => $item) {
                             if ($item instanceof stdClass) {
                                 if ($this->isSObject($item)) {
                                     $sobject = new SObject($item);
@@ -91,7 +93,7 @@ class SObject
 
                         if (sizeof($anArray) > 0) {
                             // To add more variables to the the top level sobject
-                            foreach ($anArray as $key=>$children_sobject) {
+                            foreach ($anArray as $key => $children_sobject) {
                                 $this->fields->$key = $children_sobject;
                             }
                             //array_push($this->fields, $anArray);
@@ -157,7 +159,7 @@ class SObject
             return $xml;
         }
 
-        foreach ($array['Object'] as $k=>$v) {
+        foreach ($array['Object'] as $k => $v) {
             $xml->$k = $v;
         }
 
@@ -172,12 +174,13 @@ class SObject
      * @param  string $contents
      * @return array
      */
-    function xml2array($contents, $get_attributes=1)
+    function xml2array($contents, $get_attributes = 1)
     {
-        if(!$contents) { return array();
+        if (!$contents) {
+            return array();
         }
 
-        if(!function_exists('xml_parser_create')) {
+        if (!function_exists('xml_parser_create')) {
             //print "'xml_parser_create()' function not found!";
             return array('not found');
         }
@@ -188,7 +191,8 @@ class SObject
         xml_parse_into_struct($parser, $contents, $xml_values);
         xml_parser_free($parser);
 
-        if(!$xml_values) { return;//Hmm...
+        if (!$xml_values) {
+            return;//Hmm...
         }
 
         //Initializations
@@ -200,7 +204,7 @@ class SObject
         $current = &$xml_array;
 
         //Go through the tags.
-        foreach($xml_values as $data) {
+        foreach ($xml_values as $data) {
             unset($attributes, $value);//Remove existing values, or there will be trouble
 
             //This command will extract these variables into the foreach scope
@@ -212,13 +216,15 @@ class SObject
                 switch ($get_attributes) {
                 case 1:
                     $result = array();
-                    if(isset($value)) { $result['value'] = $value;
+                    if (isset($value)) {
+                        $result['value'] = $value;
                     }
 
                     //Set the attributes too.
-                    if(isset($attributes)) {
-                        foreach($attributes as $attr => $val) {
-                            if($get_attributes == 1) { $result['attr'][$attr] = $val; //Set all the attributes in a array called 'attr'
+                    if (isset($attributes)) {
+                        foreach ($attributes as $attr => $val) {
+                            if ($get_attributes == 1) {
+                                $result['attr'][$attr] = $val; //Set all the attributes in a array called 'attr'
                             }
                             /**
                              * :TODO: should we change the key name to '_attr'? Someone may use the tagname 'attr'. Same goes for 'value' too
@@ -244,15 +250,14 @@ class SObject
             }
 
             //See tag status and do the needed.
-            if($type == "open") {//The starting of the tag '<tag>'
+            if ($type == "open") {//The starting of the tag '<tag>'
                 $parent[$level-1] = &$current;
 
-                if(!is_array($current) or (!in_array($tag, array_keys($current)))) { //Insert New tag
+                if (!is_array($current) or (!in_array($tag, array_keys($current)))) { //Insert New tag
                     $current[$tag] = $result;
                     $current = &$current[$tag];
-
                 } else { //There was another element with the same tag name
-                    if(isset($current[$tag][0])) {
+                    if (isset($current[$tag][0])) {
                         array_push($current[$tag], $result);
                     } else {
                         $current[$tag] = array($current[$tag],$result);
@@ -260,14 +265,12 @@ class SObject
                     $last = count($current[$tag]) - 1;
                     $current = &$current[$tag][$last];
                 }
-
-            } elseif($type == "complete") { //Tags that ends in 1 line '<tag />'
+            } elseif ($type == "complete") { //Tags that ends in 1 line '<tag />'
                 //See if the key is already taken.
-                if(!isset($current[$tag])) { //New Key
+                if (!isset($current[$tag])) { //New Key
                     $current[$tag] = $result;
-
                 } else { //If taken, put all things inside a list(array)
-                    if((is_array($current[$tag]) and $get_attributes == 0)//If it is already an array...
+                    if ((is_array($current[$tag]) and $get_attributes == 0)//If it is already an array...
                         or (isset($current[$tag][0]) and is_array($current[$tag][0]) and ($get_attributes == 1 || $get_attributes == 2))
                     ) {
                         array_push($current[$tag], $result); // ...push the new element into that array.
@@ -275,8 +278,7 @@ class SObject
                         $current[$tag] = array($current[$tag],$result); //...Make it an array using using the existing value and the new value
                     }
                 }
-
-            } elseif($type == 'close') { //End of tag '</tag>'
+            } elseif ($type == 'close') { //End of tag '</tag>'
                 $current = &$parent[$level-1];
             }
         }

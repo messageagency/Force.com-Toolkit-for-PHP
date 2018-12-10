@@ -12,7 +12,7 @@ class QueryResult implements \Iterator
     public $pointer;
 
     /**
-     * @var \DeveloperForce\PhpToolkit\SforceBaseClient
+     * @var \DeveloperForce\PhpToolkit\BaseClient
      */
     private $sf;
 
@@ -25,25 +25,23 @@ class QueryResult implements \Iterator
         $this->pointer = 0;
         $this->sf = false;
 
-        if($response instanceof QueryResult) {
+        if ($response instanceof QueryResult) {
             $this->records = $response->records;
-        }
-        else {
+        } else {
             $this->records = array();
             if (isset($response->records)) {
                 if (is_array($response->records)) {
                     foreach ($response->records as $record) {
                         array_push($this->records, $record);
                     };
-                }
-                else {
+                } else {
                     $this->records = [];
                 }
             }
         }
     }
 
-    public function setSf(SforceBaseClient $sf)
+    public function setSf(BaseClient $sf)
     {
         $this->sf = $sf;
     } // Dependency Injection
@@ -71,7 +69,8 @@ class QueryResult implements \Iterator
         while ($this->pointer >= count($this->records)) {
             // Pointer is larger than (current) result set; see if we can fetch more
             if ($this->done === false) {
-                if ($this->sf === false) { throw new \Exception("Dependency not met!");
+                if ($this->sf === false) {
+                    throw new \Exception("Dependency not met!");
                 }
                 $response = $this->sf->queryMore($this->queryLocator);
                 $this->records = array_merge($this->records, $response->records); // Append more results
@@ -81,7 +80,8 @@ class QueryResult implements \Iterator
                 return false; // No more records to fetch
             }
         }
-        if (isset($this->records[$this->pointer])) { return true;
+        if (isset($this->records[$this->pointer])) {
+            return true;
         }
 
         throw new \Exception("QueryResult has gaps in the record data?");

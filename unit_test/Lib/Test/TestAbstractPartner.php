@@ -7,9 +7,9 @@ abstract class Lib_Test_TestAbstractPartner extends Lib_Test_TestAbstract
 	public function __construct($soapDir)
 	{
 		parent::__construct($soapDir);
-		require_once ($this->_soapDir . '/SforcePartnerClient.php');
+		require_once ($this->_soapDir . '/PartnerClient.php');
 		require_once ($this->_soapDir . '/SforceHeaderOptions.php');
-		require_once ($this->_soapDir . '/SforceMetadataClient.php');
+		require_once ($this->_soapDir . '/MetadataClient;
 				
 		$this->_mySforceConnection = new SforcePartnerClient();
 		$this->_mySoapClient = $this->_mySforceConnection->createConnection($this->getWSDL());

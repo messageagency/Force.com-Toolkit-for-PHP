@@ -32,4 +32,3 @@ abstract class ProcessRequest
     public $comments;
     public $nextApproverIds;
 }
-

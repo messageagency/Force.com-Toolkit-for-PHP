@@ -1,6 +1,6 @@
 <?php
 
-namespace DeveloperForce\PhpToolkit;
+namespace DeveloperForce\PhpToolkit\HeaderOptions;
 
 class PackageVersionHeader
 {
@@ -20,4 +20,3 @@ class PackageVersionHeader
         $this->packageVersions = $packageVersions;
     }
 }
-

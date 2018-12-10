@@ -1,6 +1,6 @@
 <?php
 
-namespace DeveloperForce\PhpToolkit;
+namespace DeveloperForce\PhpToolkit\HeaderOptions;
 
 /**
  * This class is used by PackageVersionHeader
@@ -28,4 +28,3 @@ class PackageVersion
         $this->namespace = $namespace;
     }
 }
-
