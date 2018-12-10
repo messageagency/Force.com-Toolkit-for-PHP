@@ -9,11 +9,11 @@ namespace DeveloperForce\PhpToolkit;
  */
 class MruHeader
 {
-  // boolean that Indicates whether to update the list of most recently used items (True) or not (False).
-  public $updateMruFlag;
+    // boolean that Indicates whether to update the list of most recently used items (True) or not (False).
+    public $updateMruFlag;
 
-  public function __construct($bool)
-  {
-    $this->updateMruFlag = $bool;
-  }
+    public function __construct($bool)
+    {
+        $this->updateMruFlag = $bool;
+    }
 }

@@ -4,14 +4,14 @@ namespace DeveloperForce\PhpToolkit;
 
 class EmailHeader
 {
-  public $triggerAutoResponseEmail;
-  public $triggerOtherEmail;
-  public $triggerUserEmail;
+    public $triggerAutoResponseEmail;
+    public $triggerOtherEmail;
+    public $triggerUserEmail;
 
-  public function __construct($triggerAutoResponseEmail = false, $triggerOtherEmail = false, $triggerUserEmail = false)
-  {
-    $this->triggerAutoResponseEmail = $triggerAutoResponseEmail;
-    $this->triggerOtherEmail = $triggerOtherEmail;
-    $this->triggerUserEmail = $triggerUserEmail;
-  }
+    public function __construct($triggerAutoResponseEmail = false, $triggerOtherEmail = false, $triggerUserEmail = false)
+    {
+        $this->triggerAutoResponseEmail = $triggerAutoResponseEmail;
+        $this->triggerOtherEmail = $triggerOtherEmail;
+        $this->triggerUserEmail = $triggerUserEmail;
+    }
 }

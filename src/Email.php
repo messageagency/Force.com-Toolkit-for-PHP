@@ -30,11 +30,11 @@ namespace DeveloperForce\PhpToolkit;
 
 class Email
 {
-  const EMAIL_PRIORITY_HIGHEST = 'Highest';
-  const EMAIL_PRIORITY_HIGH = 'High';
-  const EMAIL_PRIORITY_NORMAL = 'Normal';
-  const EMAIL_PRIORITY_LOW = 'Low';
-  const EMAIL_PRIORITY_LOWEST = 'Lowest';
+    const EMAIL_PRIORITY_HIGHEST = 'Highest';
+    const EMAIL_PRIORITY_HIGH = 'High';
+    const EMAIL_PRIORITY_NORMAL = 'Normal';
+    const EMAIL_PRIORITY_LOW = 'Low';
+    const EMAIL_PRIORITY_LOWEST = 'Lowest';
 
     public function setBccSender($bccSender)
     {

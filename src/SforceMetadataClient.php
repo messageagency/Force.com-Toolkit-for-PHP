@@ -35,9 +35,9 @@ use stdClass;
 class SforceMetadataClient
 {
 
-  /**
-   * @var \SoapClient
-   */
+    /**
+     * @var \SoapClient
+     */
     public $sforce;
     protected $sessionId;
     protected $location;

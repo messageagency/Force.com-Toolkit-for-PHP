@@ -4,10 +4,10 @@ namespace DeveloperForce\PhpToolkit;
 
 class AllowFieldTruncationHeader
 {
-  public $allowFieldTruncation;
+    public $allowFieldTruncation;
 
-  public function __construct($allowFieldTruncation)
-  {
-    $this->allowFieldTruncation = $allowFieldTruncation;
-  }
+    public function __construct($allowFieldTruncation)
+    {
+        $this->allowFieldTruncation = $allowFieldTruncation;
+    }
 }

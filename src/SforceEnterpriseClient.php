@@ -56,7 +56,7 @@ class SforceEnterpriseClient extends SforceBaseClient
      *
      * @param \DeveloperForce\PhpToolkit\SObject[] $sObjects
      *   Array of one or more sObjects (up to 200) to create.
-     * @param string $type
+     * @param string                               $type
      *   SObject type to be created.
      */
     public function create($sObjects, $type)

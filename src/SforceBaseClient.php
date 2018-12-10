@@ -41,9 +41,9 @@ use stdClass;
 class SforceBaseClient
 {
 
-  /**
-   * @var SoapClient;
-   */
+    /**
+     * @var SoapClient;
+     */
     protected $sforce;
     protected $sessionId;
     protected $location;
