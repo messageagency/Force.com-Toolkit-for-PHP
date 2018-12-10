@@ -24,22 +24,27 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-define("DEPLOYMENT_STATUS_INDEVELOPMENT", 'InDevelopment');
-define("DEPLOYMENT_STATUS_DEPLOYED", 'Deployed');
 
-define("GENDER_NEUTER", 'Neuter');
-define("GENDER_MASCULINE", 'Masculine');
-define("GENDER_FEMININE", 'Feminine');
+namespace DeveloperForce\PhpToolkit;
 
-define("SHARING_MODEL_PRIVATE", 'Private');
-define("SHARING_MODEL_READ", 'Read');
-define("SHARING_MODEL_READWRITE", 'ReadWrite');
+final class SforceFieldTypes {
 
-define("STARTS_WITH_CONSONANT", 'Consonant');
-define("STARTS_WITH_VOWEL", 'Vowel');
-define("STARTS_WITH_SPECIAL", 'Special');
+  const DEPLOYMENT_STATUS_INDEVELOPMENT = 'InDevelopment';
+  const DEPLOYMENT_STATUS_DEPLOYED = 'Deployed';
 
-define("TREAT_BLANKS_AS_BLANK", 'BlankAsBlank');
-define("TREAT_BLANKS_AS_ZERO", 'BlankAsZero');
+  const GENDER_NEUTER = 'Neuter';
+  const GENDER_MASCULINE = 'Masculine';
+  const GENDER_FEMININE = 'Feminine';
 
-?>
+  const SHARING_MODEL_PRIVATE = 'Private';
+  const SHARING_MODEL_READ = 'Read';
+  const SHARING_MODEL_READWRITE = 'ReadWrite';
+
+  const STARTS_WITH_CONSONANT = 'Consonant';
+  const STARTS_WITH_VOWEL = 'Vowel';
+  const STARTS_WITH_SPECIAL = 'Special';
+
+  const TREAT_BLANKS_AS_BLANK = 'BlankAsBlank';
+  const TREAT_BLANKS_AS_ZERO = 'BlankAsZero';
+
+}

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2007, salesforce.com, inc.
  * All rights reserved.
@@ -24,7 +25,12 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-require_once 'SforceBaseClient.php';
+
+namespace DeveloperForce\PhpToolkit;
+
+use SoapVar;
+use SoapParam;
+use stdClass;
 
 /**
  * This file contains two classes.
@@ -48,10 +54,10 @@ class SforceEnterpriseClient extends SforceBaseClient
     /**
      * Adds one or more new individual objects to your organization's data.
      *
-     * @param  array                $sObjects          Array of one or more sObjects (up to 200) to create.
-     * @param  AssignmentRuleHeader $assignment_header is optional.  Defaults to NULL
-     * @param  MruHeader            $mru_header        is optional.  Defaults to NULL
-     * @return SaveResult
+     * @param \DeveloperForce\PhpToolkit\SObject[] $sObjects
+     *   Array of one or more sObjects (up to 200) to create.
+     * @param string $type
+     *   SObject type to be created.
      */
     public function create($sObjects, $type)
     {
@@ -165,4 +171,4 @@ class SforceEnterpriseClient extends SforceBaseClient
         return parent::_merge($arg);
     }
 }
-?>
+

@@ -39,7 +39,7 @@ require_once ('../soapclient/SforceHeaderOptions.php');
  * @package SalesforceTest
  */
 class SforcePartnerClientTest extends PHPUnit_Framework_TestCase {
-  private $wsdl = '../soapclient/partner.wsdl.xml';
+  private $wsdl = '../wsdl/partner.wsdl.xml';
   private $username = 'username@sample.com';
   private $password = 'changeme';
   protected $mySforceConnection = null;

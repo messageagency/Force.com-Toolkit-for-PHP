@@ -24,9 +24,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-require_once 'SforceBaseClient.php';
-//require_once ('SforceEmail.php');
 
+namespace DeveloperForce\PhpToolkit;
+
+use SoapClient;
+use DOMDocument;
+use SoapVar;
+use stdClass;
 
 /**
  * This file contains two classes.

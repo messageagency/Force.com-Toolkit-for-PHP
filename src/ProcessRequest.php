@@ -24,20 +24,12 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
+namespace DeveloperForce\PhpToolkit;
+
 abstract class ProcessRequest
 {
     public $comments;
     public $nextApproverIds;
 }
 
-class ProcessSubmitRequest extends ProcessRequest
-{
-    public $objectId;
-}
-
-class ProcessWorkitemRequest extends ProcessRequest
-{
-    public $action;
-    public $workitemId;
-}
-?>

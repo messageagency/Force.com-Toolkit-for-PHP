@@ -24,10 +24,20 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-require_once 'SforceMetaObject.php';
+
+namespace DeveloperForce\PhpToolkit;
+
+use SoapClient;
+use SoapVar;
+use SoapHeader;
+use stdClass;
 
 class SforceMetadataClient
 {
+
+  /**
+   * @var \SoapClient
+   */
     public $sforce;
     protected $sessionId;
     protected $location;
@@ -199,4 +209,4 @@ class SforceMetadataClient
 }
 
 
-?>
+
