@@ -86,7 +86,7 @@ class SforceMetadataClient {
     $this->sessionId = $loginResult->sessionId;
     $this->setSessionHeader($this->sessionId);
     $serverURL = $loginResult->serverUrl;
-    $this->setEndPoint($serverURL);
+    $this->setEndpoint($serverURL);
   }
 
   /**
